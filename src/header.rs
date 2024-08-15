@@ -8,14 +8,14 @@ use super::error::Error;
 
 #[derive(Debug)]
 pub(crate) struct FileHeader {
-    pub header_size: u32,
-    pub archive_size: u32,
-    pub format_version: u16,
-    pub block_size: u16,
-    pub hash_table_offset: u32,
-    pub block_table_offset: u32,
-    pub hash_table_entries: u32,
-    pub block_table_entries: u32,
+    header_size: u32,
+    archive_size: u32,
+    format_version: u16,
+    block_size: u16,
+    hash_table_offset: u32,
+    block_table_offset: u32,
+    hash_table_entries: u32,
+    block_table_entries: u32,
 }
 
 impl FileHeader {
@@ -84,6 +84,39 @@ impl FileHeader {
         writer.write_u32::<LE>(self.block_table_entries)?;
 
         Ok(())
+    }
+
+    // Getter methods
+    pub fn header_size(&self) -> u32 {
+        self.header_size
+    }
+
+    pub fn archive_size(&self) -> u32 {
+        self.archive_size
+    }
+
+    pub fn format_version(&self) -> u16 {
+        self.format_version
+    }
+
+    pub fn block_size(&self) -> u16 {
+        self.block_size
+    }
+
+    pub fn hash_table_offset(&self) -> u32 {
+        self.hash_table_offset
+    }
+
+    pub fn block_table_offset(&self) -> u32 {
+        self.block_table_offset
+    }
+
+    pub fn hash_table_entries(&self) -> u32 {
+        self.hash_table_entries
+    }
+
+    pub fn block_table_entries(&self) -> u32 {
+        self.block_table_entries
     }
 }
 
