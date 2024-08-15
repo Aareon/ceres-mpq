@@ -70,19 +70,19 @@ pub(crate) struct ArchiveInfo {
 impl ArchiveInfo {
     fn new(file_size: u64, header_offset: u64, header: &FileHeader) -> ArchiveInfo {
         let hash_table_info = TableInfo {
-            entries: u64::from(header.hash_table_entries),
-            offset: u64::from(header.hash_table_offset),
-            size: u64::from(header.block_table_offset - header.hash_table_offset),
+            entries: u64::from(header.hash_table_entries()),
+            offset: u64::from(header.hash_table_offset()),
+            size: u64::from(header.block_table_offset() - header.hash_table_offset()),
         };
 
         let block_table_info = TableInfo {
-            entries: u64::from(header.block_table_entries),
-            offset: u64::from(header.block_table_offset),
-            size: u64::from(header.archive_size - header.block_table_offset),
+            entries: u64::from(header.block_table_entries()),
+            offset: u64::from(header.block_table_offset()),
+            size: u64::from(header.archive_size() - header.block_table_offset()),
         };
 
-        let archive_size = u64::from(header.archive_size);
-        let sector_size = 512 * 2u64.pow(u32::from(header.block_size));
+        let archive_size = u64::from(header.archive_size());
+        let sector_size = 512 * 2u64.pow(u32::from(header.block_size()));
 
         ArchiveInfo {
             hash_table_info,
