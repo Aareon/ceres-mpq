@@ -7,7 +7,7 @@ use super::consts::*;
 use super::error::Error;
 
 #[derive(Debug)]
-pub(crate) struct FileHeader {
+pub struct FileHeader {
     header_size: u32,
     archive_size: u32,
     format_version: u16,
